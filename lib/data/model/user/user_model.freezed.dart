@@ -36,9 +36,7 @@ mixin _$UserModel {
   String? get eRelation => throw _privateConstructorUsedError;
   bool? get isActive => throw _privateConstructorUsedError;
   bool? get isAdmin => throw _privateConstructorUsedError;
-  @JsonSerializable(anyMap: true, explicitToJson: true)
   NameLocalisedFields? get name => throw _privateConstructorUsedError;
-  @JsonSerializable(anyMap: true, explicitToJson: true)
   NameLocalisedFields? get position => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -69,9 +67,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? eRelation,
       bool? isActive,
       bool? isAdmin,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
       NameLocalisedFields? name,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
       NameLocalisedFields? position});
 
   $NameLocalisedFieldsCopyWith<$Res>? get name;
@@ -236,9 +232,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? eRelation,
       bool? isActive,
       bool? isAdmin,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
       NameLocalisedFields? name,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
       NameLocalisedFields? position});
 
   @override
@@ -374,8 +368,7 @@ class _$UserModelImpl implements _UserModel {
       required this.eRelation,
       required this.isActive,
       required this.isAdmin,
-      @JsonSerializable(anyMap: true, explicitToJson: true) required this.name,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
+      required this.name,
       required this.position});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -414,10 +407,8 @@ class _$UserModelImpl implements _UserModel {
   @override
   final bool? isAdmin;
   @override
-  @JsonSerializable(anyMap: true, explicitToJson: true)
   final NameLocalisedFields? name;
   @override
-  @JsonSerializable(anyMap: true, explicitToJson: true)
   final NameLocalisedFields? position;
 
   @override
@@ -511,9 +502,7 @@ abstract class _UserModel implements UserModel {
       required final String? eRelation,
       required final bool? isActive,
       required final bool? isAdmin,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
       required final NameLocalisedFields? name,
-      @JsonSerializable(anyMap: true, explicitToJson: true)
       required final NameLocalisedFields? position}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -552,10 +541,8 @@ abstract class _UserModel implements UserModel {
   @override
   bool? get isAdmin;
   @override
-  @JsonSerializable(anyMap: true, explicitToJson: true)
   NameLocalisedFields? get name;
   @override
-  @JsonSerializable(anyMap: true, explicitToJson: true)
   NameLocalisedFields? get position;
   @override
   @JsonKey(ignore: true)
