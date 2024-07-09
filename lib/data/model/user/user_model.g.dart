@@ -6,37 +6,24 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NameLocalisedFieldsImpl _$$NameLocalisedFieldsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$NameLocalisedFieldsImpl(
-      en: json['en'] as String?,
-      np: json['np'] as String?,
-    );
-
-Map<String, dynamic> _$$NameLocalisedFieldsImplToJson(
-        _$NameLocalisedFieldsImpl instance) =>
-    <String, dynamic>{
-      'en': instance.en,
-      'np': instance.np,
-    };
-
 _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
     _$UserModelImpl(
-      appliedDate: json['appliedDate'] as String,
-      picture: json['picture'] as String,
-      viber: (json['viber'] as num).toInt(),
-      whatsapp: (json['whatsapp'] as num).toInt(),
-      cell: (json['cell'] as num).toInt(),
-      email: json['email'] as String,
-      address: json['address'] as String,
-      github: json['github'] as String,
-      linkedIn: json['linkedIn'] as String,
-      bio: json['bio'] as String,
-      eName: json['eName'] as String,
-      eNumber: (json['eNumber'] as num).toInt(),
-      eRelation: json['eRelation'] as String,
-      isActive: json['isActive'] as bool,
-      isAdmin: json['isAdmin'] as bool,
+      uid: json['uid'] as String?,
+      appliedDate: json['appliedDate'] as String?,
+      picture: json['picture'] as String?,
+      viber: (json['viber'] as num?)?.toInt(),
+      whatsapp: (json['whatsapp'] as num?)?.toInt(),
+      cell: (json['cell'] as num?)?.toInt(),
+      email: json['email'] as String?,
+      address: json['address'] as String?,
+      github: json['github'] as String?,
+      linkedIn: json['linkedIn'] as String?,
+      bio: json['bio'] as String?,
+      eName: json['eName'] as String?,
+      eNumber: (json['eNumber'] as num?)?.toInt(),
+      eRelation: json['eRelation'] as String?,
+      isActive: json['isActive'] as bool?,
+      isAdmin: json['isAdmin'] as bool?,
       name: json['name'] == null
           ? null
           : NameLocalisedFields.fromJson(json['name'] as Map<String, dynamic>),
@@ -48,6 +35,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
     <String, dynamic>{
+      'uid': instance.uid,
       'appliedDate': instance.appliedDate,
       'picture': instance.picture,
       'viber': instance.viber,
@@ -65,4 +53,18 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'isAdmin': instance.isAdmin,
       'name': instance.name,
       'position': instance.position,
+    };
+
+_$NameLocalisedFieldsImpl _$$NameLocalisedFieldsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NameLocalisedFieldsImpl(
+      en: json['en'] as String?,
+      np: json['np'] as String?,
+    );
+
+Map<String, dynamic> _$$NameLocalisedFieldsImplToJson(
+        _$NameLocalisedFieldsImpl instance) =>
+    <String, dynamic>{
+      'en': instance.en,
+      'np': instance.np,
     };

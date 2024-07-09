@@ -42,12 +42,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDYNOPiGpZ1zF83aFRBkx4uVx7WeaSMIi0',
-    appId: '1:521621509248:web:7a92153b34945f0a428265',
+    appId: '1:521621509248:web:1057068fe8e64f9b428265',
     messagingSenderId: '521621509248',
     projectId: 'hrmanagement-bc458',
     authDomain: 'hrmanagement-bc458.firebaseapp.com',
     storageBucket: 'hrmanagement-bc458.appspot.com',
-    measurementId: 'G-C1WRGTJDND',
+    measurementId: 'G-BW4H36CCRL',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -78,11 +78,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyDYNOPiGpZ1zF83aFRBkx4uVx7WeaSMIi0',
-    appId: '1:521621509248:web:6bb0ed9dbd459608428265',
+    appId: '1:521621509248:web:1057068fe8e64f9b428265',
     messagingSenderId: '521621509248',
     projectId: 'hrmanagement-bc458',
     authDomain: 'hrmanagement-bc458.firebaseapp.com',
     storageBucket: 'hrmanagement-bc458.appspot.com',
-    measurementId: 'G-7BK9ESJ9TP',
+    measurementId: 'G-BW4H36CCRL',
   );
+
 }

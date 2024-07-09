@@ -151,7 +151,7 @@ class _CustomTextFormFieldState extends State<AppTextFormField> {
   void initState() {
     super.initState();
     _passwordVisibility = !widget.isSecure;
-    widget.textEditingController?.text = widget.initValue ?? "";
+    // widget.textEditingController?.text = widget.initValue ?? "";
 
     _focusNode.addListener(() {
       setState(() {

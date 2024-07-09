@@ -91,7 +91,8 @@ class _ListViewVerticalState extends State<ListViewVertical> {
                               children: [
                                 CircleAvatar(
                                   radius: 40,
-                                  backgroundImage: NetworkImage(user.picture),
+                                  backgroundImage:
+                                      NetworkImage(user.picture ?? ""),
                                 ),
                                 Text(
                                   user.name?.en ?? 'a',
@@ -104,11 +105,11 @@ class _ListViewVerticalState extends State<ListViewVertical> {
                                       color: Colors.white, fontSize: 20),
                                 ),
                                 Text(
-                                  user.email,
+                                  user.email ?? "",
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
-                                user.isActive
+                                user.isActive ?? false
                                     ? Container(
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
@@ -159,7 +160,7 @@ class _ListViewVerticalState extends State<ListViewVertical> {
                                     ),
                                   ],
                                 ),
-                                user.isAdmin
+                                user.isAdmin ?? false
                                     ? Container(
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(

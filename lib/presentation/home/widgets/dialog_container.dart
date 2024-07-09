@@ -1,6 +1,8 @@
+import 'package:admin_pannel/data/model/user/user_model.dart';
 import 'package:admin_pannel/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:admin_pannel/presentation/common/app_button.dart';
 import 'package:admin_pannel/presentation/common/app_text_form_field.dart';
+import 'package:admin_pannel/presentation/home/bloc/user_details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -27,95 +29,140 @@ class _DialogContainerState extends State<DialogContainer> {
   TextEditingController eNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController bioController = TextEditingController();
+  TextEditingController githubController = TextEditingController();
+  TextEditingController linkedinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 520,
-      width: 560,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-        child: Stepper(
-          controlsBuilder: (BuildContext context, ControlsDetails details) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (_currentStep == 2)
-                    AppButton(
-                      title: "Submit",
-                      borderColor: Colors.black,
-                      textColorColor: Colors.black,
-                      height: 32,
-                      width: 68,
-                      onTap: details.onStepContinue,
-                    )
-                  else
-                    AppButton(
-                      title: "Next",
-                      borderColor: Colors.black,
-                      textColorColor: Colors.black,
-                      height: 32,
-                      width: 68,
-                      onTap: details.onStepContinue,
-                    ),
-
-                  //   ElevatedButton(
-                  //     onPressed: details.onStepContinue,
-                  //     style: ElevatedButton.styleFrom(
-                  //       padding: const EdgeInsets.symmetric(
-                  //           horizontal: 24, vertical: 12),
-                  //       textStyle: const TextStyle(fontSize: 16),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(8),
-                  //       ),
-                  //     ),
-                  //     child: const Text('Submit'),
-                  //   )
-                  // else
-                  //   ElevatedButton(
-                  //     onPressed: details.onStepContinue,
-                  //     style: ElevatedButton.styleFrom(
-                  //       padding: const EdgeInsets.symmetric(
-                  //           horizontal: 24, vertical: 12),
-                  //       textStyle: const TextStyle(fontSize: 16),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(8),
-                  //       ),
-                  //     ),
-                  //     child: const Text('Next'),
-                  //   ),
-                  if (_currentStep > 0)
-                    AppButton(
-                      title: "Back",
-                      borderColor: Colors.black,
-                      textColorColor: Colors.black,
-                      height: 32,
-                      width: 68,
-                      onTap: details.onStepCancel,
-                    ),
-                ],
-              ),
-            );
-          },
-          type: StepperType.horizontal,
-          steps: getSteps(),
-          currentStep: _currentStep,
-          onStepContinue: () {
-            if (_currentStep < getSteps().length - 1) {
-              setState(() => _currentStep += 1);
-            }
-          },
-          onStepCancel: () {
-            if (_currentStep > 0) {
-              setState(() => _currentStep -= 1);
-            }
-          },
+    return BlocListener<UserDetailsBloc, UserDetailsState>(
+      listener: (context, state) {
+        if (state.userDetailsStateEnum == UserDetailsStateEnum.success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('User Added Successfully')));
+        } else if (state.userDetailsStateEnum == UserDetailsStateEnum.failure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("failed to add user ${state.error}")),
+          );
+        }
+      },
+      child: Container(
+        height: 520,
+        width: 560,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+          child: Stepper(
+            controlsBuilder: (BuildContext context, ControlsDetails details) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // if (_currentStep == 2)
+                    //   const AppButton(
+                    //     title: "Submit",
+                    //     borderColor: Colors.black,
+                    //     textColorColor: Colors.black,
+                    //     height: 32,
+                    //     width: 68,
+                    //     onTap: context.read<UserDetailsBloc>(),
+                    //   )
+                    // else
+                    //   AppButton(
+                    //     title: "Next",
+                    //     borderColor: Colors.black,
+                    //     textColorColor: Colors.black,
+                    //     height: 32,
+                    //     width: 68,
+                    //     onTap: details.onStepContinue,
+                    //   ),
+                    if (_currentStep == 2)
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<UserDetailsBloc>().add(
+                                AddUserEvent(
+                                  userModel: UserModel(
+                                    uid: "",
+                                    appliedDate: dateController.text,
+                                    picture: '',
+                                    viber: int.parse(cellController.text),
+                                    whatsapp: int.parse(cellController.text),
+                                    cell: int.parse(cellController.text),
+                                    email: emailController.text,
+                                    address: addressController.text,
+                                    github: githubController.text,
+                                    linkedIn: linkedinController.text,
+                                    bio: bioController.text,
+                                    eName: eNameController.text,
+                                    eNumber: int.parse(eNumberController.text),
+                                    eRelation: eRelationController.text,
+                                    isActive: isActive,
+                                    isAdmin: isAdmin,
+                                    name: NameLocalisedFields(
+                                      en: nameController.text,
+                                      np: '',
+                                    ),
+                                    position: NameLocalisedFields(
+                                      en: positionController.text,
+                                      np: '',
+                                    ),
+                                  ),
+                                ),
+                              );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          textStyle: const TextStyle(fontSize: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Submit'),
+                      )
+                    else
+                      ElevatedButton(
+                        onPressed: details.onStepContinue,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          textStyle: const TextStyle(fontSize: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Next'),
+                      ),
+                    if (_currentStep > 0)
+                      AppButton(
+                        title: "Back",
+                        borderColor: Colors.black,
+                        textColorColor: Colors.black,
+                        height: 32,
+                        width: 68,
+                        onTap: details.onStepCancel,
+                      ),
+                  ],
+                ),
+              );
+            },
+            type: StepperType.horizontal,
+            steps: getSteps(),
+            currentStep: _currentStep,
+            onStepContinue: () {
+              if (_currentStep < getSteps().length - 1) {
+                setState(() => _currentStep += 1);
+              }
+            },
+            onStepCancel: () {
+              if (_currentStep > 0) {
+                setState(() => _currentStep -= 1);
+              }
+            },
+          ),
         ),
       ),
     );
@@ -197,11 +244,27 @@ class _DialogContainerState extends State<DialogContainer> {
                     ),
                   ),
                   const Gap(22),
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.grey,
+                  InkWell(
+                    onTap: () {
+                      context.read<UserDetailsBloc>().add(PickImage());
+                    },
                     child: CircleAvatar(
-                      radius: 48,
+                      radius: 50,
+                      backgroundColor: Colors.grey,
+                      child: BlocBuilder<UserDetailsBloc, UserDetailsState>(
+                        builder: (context, state) {
+                          if (state.imageFile == null) {
+                            return const CircleAvatar(
+                              radius: 48,
+                            );
+                          } else {
+                            return CircleAvatar(
+                              radius: 48,
+                              child: Image.file(state.imageFile!),
+                            );
+                          }
+                        },
+                      ),
                     ),
                   )
                 ],
@@ -309,8 +372,8 @@ class _DialogContainerState extends State<DialogContainer> {
                       height: 70,
                       width: 250,
                       child: AppTextFormField(
-                        textEditingController: eNameController,
-                        helperText: "Emergency Contact Name",
+                        textEditingController: githubController,
+                        helperText: "Github Profile",
                       ),
                     ),
                     const Gap(12),
@@ -318,8 +381,8 @@ class _DialogContainerState extends State<DialogContainer> {
                       width: 250,
                       height: 70,
                       child: AppTextFormField(
-                        textEditingController: addressController,
-                        helperText: "Address",
+                        textEditingController: linkedinController,
+                        helperText: "linkedIn Profile",
                         // title: "Phone Number",
                       ),
                     ),
