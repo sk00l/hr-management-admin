@@ -350,26 +350,27 @@ class __$$UserModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserModelImpl implements _UserModel {
+class _$UserModelImpl extends _UserModel {
   const _$UserModelImpl(
-      {required this.uid,
-      required this.appliedDate,
-      required this.picture,
-      required this.viber,
-      required this.whatsapp,
-      required this.cell,
-      required this.email,
-      required this.address,
-      required this.github,
-      required this.linkedIn,
-      required this.bio,
-      required this.eName,
-      required this.eNumber,
-      required this.eRelation,
-      required this.isActive,
-      required this.isAdmin,
-      required this.name,
-      required this.position});
+      {this.uid,
+      this.appliedDate,
+      this.picture,
+      this.viber,
+      this.whatsapp,
+      this.cell,
+      this.email,
+      this.address,
+      this.github,
+      this.linkedIn,
+      this.bio,
+      this.eName,
+      this.eNumber,
+      this.eRelation,
+      this.isActive,
+      this.isAdmin,
+      this.name,
+      this.position})
+      : super._();
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -484,26 +485,27 @@ class _$UserModelImpl implements _UserModel {
   }
 }
 
-abstract class _UserModel implements UserModel {
+abstract class _UserModel extends UserModel {
   const factory _UserModel(
-      {required final String? uid,
-      required final String? appliedDate,
-      required final String? picture,
-      required final int? viber,
-      required final int? whatsapp,
-      required final int? cell,
-      required final String? email,
-      required final String? address,
-      required final String? github,
-      required final String? linkedIn,
-      required final String? bio,
-      required final String? eName,
-      required final int? eNumber,
-      required final String? eRelation,
-      required final bool? isActive,
-      required final bool? isAdmin,
-      required final NameLocalisedFields? name,
-      required final NameLocalisedFields? position}) = _$UserModelImpl;
+      {final String? uid,
+      final String? appliedDate,
+      final String? picture,
+      final int? viber,
+      final int? whatsapp,
+      final int? cell,
+      final String? email,
+      final String? address,
+      final String? github,
+      final String? linkedIn,
+      final String? bio,
+      final String? eName,
+      final int? eNumber,
+      final String? eRelation,
+      final bool? isActive,
+      final bool? isAdmin,
+      final NameLocalisedFields? name,
+      final NameLocalisedFields? position}) = _$UserModelImpl;
+  const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -557,7 +559,7 @@ NameLocalisedFields _$NameLocalisedFieldsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NameLocalisedFields {
   String? get en => throw _privateConstructorUsedError;
-  String? get np => throw _privateConstructorUsedError;
+  String? get ne => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -571,7 +573,7 @@ abstract class $NameLocalisedFieldsCopyWith<$Res> {
           NameLocalisedFields value, $Res Function(NameLocalisedFields) then) =
       _$NameLocalisedFieldsCopyWithImpl<$Res, NameLocalisedFields>;
   @useResult
-  $Res call({String? en, String? np});
+  $Res call({String? en, String? ne});
 }
 
 /// @nodoc
@@ -588,16 +590,16 @@ class _$NameLocalisedFieldsCopyWithImpl<$Res, $Val extends NameLocalisedFields>
   @override
   $Res call({
     Object? en = freezed,
-    Object? np = freezed,
+    Object? ne = freezed,
   }) {
     return _then(_value.copyWith(
       en: freezed == en
           ? _value.en
           : en // ignore: cast_nullable_to_non_nullable
               as String?,
-      np: freezed == np
-          ? _value.np
-          : np // ignore: cast_nullable_to_non_nullable
+      ne: freezed == ne
+          ? _value.ne
+          : ne // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -611,7 +613,7 @@ abstract class _$$NameLocalisedFieldsImplCopyWith<$Res>
       __$$NameLocalisedFieldsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? en, String? np});
+  $Res call({String? en, String? ne});
 }
 
 /// @nodoc
@@ -626,16 +628,16 @@ class __$$NameLocalisedFieldsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? en = freezed,
-    Object? np = freezed,
+    Object? ne = freezed,
   }) {
     return _then(_$NameLocalisedFieldsImpl(
       en: freezed == en
           ? _value.en
           : en // ignore: cast_nullable_to_non_nullable
               as String?,
-      np: freezed == np
-          ? _value.np
-          : np // ignore: cast_nullable_to_non_nullable
+      ne: freezed == ne
+          ? _value.ne
+          : ne // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -644,7 +646,7 @@ class __$$NameLocalisedFieldsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NameLocalisedFieldsImpl implements _NameLocalisedFields {
-  const _$NameLocalisedFieldsImpl({this.en, this.np});
+  const _$NameLocalisedFieldsImpl({this.en, this.ne});
 
   factory _$NameLocalisedFieldsImpl.fromJson(Map<String, dynamic> json) =>
       _$$NameLocalisedFieldsImplFromJson(json);
@@ -652,11 +654,11 @@ class _$NameLocalisedFieldsImpl implements _NameLocalisedFields {
   @override
   final String? en;
   @override
-  final String? np;
+  final String? ne;
 
   @override
   String toString() {
-    return 'NameLocalisedFields(en: $en, np: $np)';
+    return 'NameLocalisedFields(en: $en, ne: $ne)';
   }
 
   @override
@@ -665,12 +667,12 @@ class _$NameLocalisedFieldsImpl implements _NameLocalisedFields {
         (other.runtimeType == runtimeType &&
             other is _$NameLocalisedFieldsImpl &&
             (identical(other.en, en) || other.en == en) &&
-            (identical(other.np, np) || other.np == np));
+            (identical(other.ne, ne) || other.ne == ne));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, en, np);
+  int get hashCode => Object.hash(runtimeType, en, ne);
 
   @JsonKey(ignore: true)
   @override
@@ -688,7 +690,7 @@ class _$NameLocalisedFieldsImpl implements _NameLocalisedFields {
 }
 
 abstract class _NameLocalisedFields implements NameLocalisedFields {
-  const factory _NameLocalisedFields({final String? en, final String? np}) =
+  const factory _NameLocalisedFields({final String? en, final String? ne}) =
       _$NameLocalisedFieldsImpl;
 
   factory _NameLocalisedFields.fromJson(Map<String, dynamic> json) =
@@ -697,7 +699,7 @@ abstract class _NameLocalisedFields implements NameLocalisedFields {
   @override
   String? get en;
   @override
-  String? get np;
+  String? get ne;
   @override
   @JsonKey(ignore: true)
   _$$NameLocalisedFieldsImplCopyWith<_$NameLocalisedFieldsImpl> get copyWith =>

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:admin_pannel/data/model/user/user_model.dart';
@@ -39,7 +40,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<void> saveUser(UserModel userModel) async {
     CollectionReference collectionReference = _firestore.collection('user');
-    await collectionReference.doc(userModel.email).set(userModel.toJson());
+    await collectionReference.doc(userModel.email).set(userModel.toMap());
   }
 
   @override
@@ -63,5 +64,15 @@ class UserRepository implements IUserRepository {
     File imageFile = File(pickedImage.files.single.path!);
 
     return imageFile;
+  }
+
+  @override
+  Future<void> deleteUserbyEmail(String email) async {
+    try {
+      await _firestore.collection('user').doc(email).delete();
+      log('deleted user');
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    }
   }
 }

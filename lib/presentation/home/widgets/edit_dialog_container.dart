@@ -1,5 +1,3 @@
-import 'package:admin_pannel/data/model/user/user_model.dart';
-import 'package:admin_pannel/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:admin_pannel/presentation/common/app_button.dart';
 import 'package:admin_pannel/presentation/common/app_text_form_field.dart';
 import 'package:admin_pannel/presentation/home/bloc/user_details_bloc.dart';
@@ -7,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class DialogContainer extends StatefulWidget {
-  const DialogContainer({super.key});
+class EditDialogContainer extends StatefulWidget {
+  const EditDialogContainer({super.key});
 
   @override
-  State<DialogContainer> createState() => _DialogContainerState();
+  State<EditDialogContainer> createState() => _EditDialogContainerState();
 }
 
-class _DialogContainerState extends State<DialogContainer> {
+class _EditDialogContainerState extends State<EditDialogContainer> {
   bool isAdmin = false;
   bool isActive = false;
   int _currentStep = 0;
@@ -34,110 +32,123 @@ class _DialogContainerState extends State<DialogContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserDetailsBloc, UserDetailsState>(
-      listener: (context, state) {
-        if (state.userDetailsStateEnum == UserDetailsStateEnum.success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('User Added Successfully')));
-        } else if (state.userDetailsStateEnum == UserDetailsStateEnum.failure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("failed to add user ${state.error}")),
-          );
-        }
-      },
-      child: Container(
-        height: 520,
-        width: 560,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-          child: Stepper(
-            controlsBuilder: (BuildContext context, ControlsDetails details) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (_currentStep > 0)
-                      AppButton(
-                        title: "Back",
-                        borderColor: Colors.black,
-                        textColorColor: Colors.black,
-                        height: 32,
-                        width: 68,
-                        onTap: details.onStepCancel,
-                      ),
-                    const Spacer(),
-                    if (_currentStep == 2)
-                      AppButton(
-                        title: "Submit",
-                        borderColor: Colors.black,
-                        textColorColor: Colors.black,
-                        height: 32,
-                        width: 68,
-                        onTap: () {
-                          context.read<UserDetailsBloc>().add(
-                                AddUserEvent(
-                                  userModel: UserModel(
-                                    uid: "",
-                                    appliedDate: dateController.text,
-                                    picture: '',
-                                    viber: int.parse(cellController.text),
-                                    whatsapp: int.parse(cellController.text),
-                                    cell: int.parse(cellController.text),
-                                    email: emailController.text,
-                                    address: addressController.text,
-                                    github: githubController.text,
-                                    linkedIn: linkedinController.text,
-                                    bio: bioController.text,
-                                    eName: eNameController.text,
-                                    eNumber: int.parse(eNumberController.text),
-                                    eRelation: eRelationController.text,
-                                    isActive: isActive,
-                                    isAdmin: isAdmin,
-                                    name: NameLocalisedFields(
-                                      en: nameController.text,
-                                      ne: '',
-                                    ),
-                                    position: NameLocalisedFields(
-                                      en: positionController.text,
-                                      ne: '',
-                                    ),
-                                  ),
-                                ),
-                              );
-                        },
-                      )
-                    else
-                      AppButton(
-                        title: "Next",
-                        borderColor: Colors.black,
-                        textColorColor: Colors.black,
-                        height: 32,
-                        width: 68,
-                        onTap: details.onStepContinue,
-                      ),
-                  ],
-                ),
-              );
-            },
-            type: StepperType.horizontal,
-            steps: getSteps(),
-            currentStep: _currentStep,
-            onStepContinue: () {
-              if (_currentStep < getSteps().length - 1) {
-                setState(() => _currentStep += 1);
-              }
-            },
-            onStepCancel: () {
-              if (_currentStep > 0) {
-                setState(() => _currentStep -= 1);
-              }
-            },
-          ),
+    return Container(
+      height: 520,
+      width: 560,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+        child: Stepper(
+          controlsBuilder: (BuildContext context, ControlsDetails details) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (_currentStep == 2)
+                    AppButton(
+                      title: "Submit",
+                      borderColor: Colors.black,
+                      textColorColor: Colors.black,
+                      height: 32,
+                      width: 68,
+                      onTap: () {},
+                    )
+                  else
+                    AppButton(
+                      title: "Next",
+                      borderColor: Colors.black,
+                      textColorColor: Colors.black,
+                      height: 32,
+                      width: 68,
+                      onTap: details.onStepContinue,
+                    ),
+                  // if (_currentStep == 2)
+                  //   ElevatedButton(
+                  //     onPressed: () {
+                  //       context.read<UserDetailsBloc>().add(
+                  //             AddUserEvent(
+                  //               userModel: UserModel(
+                  //                 uid: "",
+                  //                 appliedDate: dateController.text,
+                  //                 picture: '',
+                  //                 viber: int.parse(cellController.text),
+                  //                 whatsapp: int.parse(cellController.text),
+                  //                 cell: int.parse(cellController.text),
+                  //                 email: emailController.text,
+                  //                 address: addressController.text,
+                  //                 github: githubController.text,
+                  //                 linkedIn: linkedinController.text,
+                  //                 bio: bioController.text,
+                  //                 eName: eNameController.text,
+                  //                 eNumber: int.parse(eNumberController.text),
+                  //                 eRelation: eRelationController.text,
+                  //                 isActive: isActive,
+                  //                 isAdmin: isAdmin,
+                  //                 name: NameLocalisedFields(
+                  //                   en: nameController.text,
+                  //                   ne: '',
+                  //                 ),
+                  //                 position: NameLocalisedFields(
+                  //                   en: positionController.text,
+                  //                   ne: '',
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           );
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           horizontal: 24, vertical: 12),
+                  //       textStyle: const TextStyle(fontSize: 16),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(8),
+                  //       ),
+                  //     ),
+                  //     child: const Text('Submit'),
+                  //   )
+                  // else
+                  //   ElevatedButton(
+                  //     onPressed: details.onStepContinue,
+                  //     style: ElevatedButton.styleFrom(
+                  //       padding: const EdgeInsets.symmetric(
+                  //           horizontal: 24, vertical: 12),
+                  //       textStyle: const TextStyle(fontSize: 16),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(8),
+                  //       ),
+                  //     ),
+                  //     child: const Text('Next'),
+                  //   ),
+                  if (_currentStep > 0)
+                    AppButton(
+                      title: "Back",
+                      borderColor: Colors.black,
+                      textColorColor: Colors.black,
+                      height: 32,
+                      width: 68,
+                      onTap: details.onStepCancel,
+                    ),
+                ],
+              ),
+            );
+          },
+          type: StepperType.horizontal,
+          steps: getSteps(),
+          currentStep: _currentStep,
+          onStepContinue: () {
+            if (_currentStep < getSteps().length - 1) {
+              setState(() => _currentStep += 1);
+            }
+          },
+          onStepCancel: () {
+            if (_currentStep > 0) {
+              setState(() => _currentStep -= 1);
+            }
+          },
         ),
       ),
     );
@@ -223,38 +234,16 @@ class _DialogContainerState extends State<DialogContainer> {
                     onTap: () {
                       context.read<UserDetailsBloc>().add(PickImage());
                     },
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.grey,
-                      child: BlocBuilder<UserDetailsBloc, UserDetailsState>(
-                        builder: (context, state) {
-                          return CircleAvatar(
-                            radius: 48,
-                            backgroundImage: state.imageFile == null
-                                ? null
-                                : FileImage(state.imageFile!),
-                          );
-                        },
+                      child: CircleAvatar(
+                        radius: 48,
                       ),
                     ),
                   )
                 ],
               ),
-              const Gap(12),
-              BlocBuilder<SignupBloc, SignupState>(
-                builder: (context, state) {
-                  return AppButton(
-                    onTap: () async {
-                      context.read<SignupBloc>().add(SignUpRequested(
-                          email: emailController.text,
-                          password: passwordController.text));
-                    },
-                    height: 46,
-                    width: 80,
-                    title: "Change",
-                  );
-                },
-              )
             ],
           ),
         ),

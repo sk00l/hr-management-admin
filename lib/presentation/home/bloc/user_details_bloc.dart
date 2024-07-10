@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:admin_pannel/core/service_locator/service_locator.dart';
@@ -16,7 +17,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
   UserDetailsBloc() : super(const UserDetailsState()) {
     on<AddUserEvent>((event, emit) async {
       try {
-        print('AddUserEvent received'); // Debug statement
+        log('AddUserEvent received'); // Debug statement
         emit(state.copyWith(error: null));
 
         var imageUrl = await _userRepository.uploadImage(state.imageFile!);
@@ -26,12 +27,12 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
         emit(
             state.copyWith(userDetailsStateEnum: UserDetailsStateEnum.success));
       } on FirebaseException catch (e) {
-        print('FirebaseException: ${e.toString()}'); // Debug statement
+        log('FirebaseException: ${e.toString()}'); // Debug statement
         emit(state.copyWith(
             userDetailsStateEnum: UserDetailsStateEnum.failure,
             error: e.toString()));
       } catch (e) {
-        print('Exception: ${e.toString()}'); // Debug statement
+        log('Exception: ${e.toString()}'); // Debug statement
         emit(state.copyWith(
             userDetailsStateEnum: UserDetailsStateEnum.failure,
             error: e.toString()));
@@ -46,13 +47,13 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
               userDetailsStateEnum: UserDetailsStateEnum.success,
               userModelList: data);
         }, onError: (e, _) {
-          print('GetUserEvent Error: ${e.toString()}'); // Debug statement
+          log('GetUserEvent Error: ${e.toString()}'); // Debug statement
           return state.copyWith(
             userDetailsStateEnum: UserDetailsStateEnum.failure,
           );
         });
       } catch (e) {
-        print('GetUserEvent Exception: ${e.toString()}'); // Debug statement
+        log('GetUserEvent Exception: ${e.toString()}'); // Debug statement
         emit(state.copyWith(
             userDetailsStateEnum: UserDetailsStateEnum.failure,
             error: e.toString()));
@@ -61,7 +62,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
 
     on<GetUserByIdEvent>((event, emit) async {
       try {
-        print('GetUserByIdEvent received'); // Debug statement
+        log('GetUserByIdEvent received'); // Debug statement
         emit(
             state.copyWith(userDetailsStateEnum: UserDetailsStateEnum.loading));
         var res = await _userRepository.getUserById(event.email);
@@ -70,7 +71,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
           userModel: res,
         ));
       } catch (e) {
-        print('GetUserByIdEvent Exception: ${e.toString()}'); // Debug statement
+        log('GetUserByIdEvent Exception: ${e.toString()}'); // Debug statement
         emit(state.copyWith(
           userDetailsStateEnum: UserDetailsStateEnum.failure,
           error: e.toString(),
@@ -78,9 +79,21 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
       }
     });
 
+    on<DeleteUser>((event, emit) async {
+      try {
+        await _userRepository.deleteUserbyEmail(event.email);
+        emit(
+            state.copyWith(userDetailsStateEnum: UserDetailsStateEnum.success));
+      } catch (e) {
+        emit(state.copyWith(
+            userDetailsStateEnum: UserDetailsStateEnum.failure,
+            error: e.toString()));
+      }
+    });
+
     on<PickImage>((event, emit) async {
       try {
-        print('PickImage event received'); // Debug statement
+        log('PickImage event received'); // Debug statement
         emit(state.copyWith(
             userDetailsStateEnum: UserDetailsStateEnum.imagePicking));
         var res = await _userRepository.getFileFromPicker();
@@ -88,7 +101,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
             userDetailsStateEnum: UserDetailsStateEnum.imagePicked,
             imageFile: res));
       } catch (e) {
-        print('PickImage Exception: ${e.toString()}'); // Debug statement
+        log('PickImage Exception: ${e.toString()}'); // Debug statement
         emit(state.copyWith(
             userDetailsStateEnum: UserDetailsStateEnum.failure,
             error: e.toString()));

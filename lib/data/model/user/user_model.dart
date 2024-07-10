@@ -5,36 +5,44 @@ part 'user_model.g.dart';
 
 @freezed
 class UserModel with _$UserModel {
+  const UserModel._();
   const factory UserModel({
-    required String? uid,
-    required String? appliedDate,
-    required String? picture,
-    required int? viber,
-    required int? whatsapp,
-    required int? cell,
-    required String? email,
-    required String? address,
-    required String? github,
-    required String? linkedIn,
-    required String? bio,
-    required String? eName,
-    required int? eNumber,
-    required String? eRelation,
-    required bool? isActive,
-    required bool? isAdmin,
-    required NameLocalisedFields? name,
-    required NameLocalisedFields? position,
+    String? uid,
+    String? appliedDate,
+    String? picture,
+    int? viber,
+    int? whatsapp,
+    int? cell,
+    String? email,
+    String? address,
+    String? github,
+    String? linkedIn,
+    String? bio,
+    String? eName,
+    int? eNumber,
+    String? eRelation,
+    bool? isActive,
+    bool? isAdmin,
+    NameLocalisedFields? name,
+    NameLocalisedFields? position,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
+
+  Map<String, dynamic> toMap() {
+    var json = toJson();
+    json["name"] = name?.toJson();
+    json["position"] = position?.toJson();
+    return json;
+  }
 }
 
 @freezed
 class NameLocalisedFields with _$NameLocalisedFields {
   const factory NameLocalisedFields({
     String? en,
-    String? np,
+    String? ne,
   }) = _NameLocalisedFields;
 
   factory NameLocalisedFields.fromJson(Map<String, dynamic> json) =>

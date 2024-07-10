@@ -59,12 +59,12 @@ _$NameLocalisedFieldsImpl _$$NameLocalisedFieldsImplFromJson(
         Map<String, dynamic> json) =>
     _$NameLocalisedFieldsImpl(
       en: json['en'] as String?,
-      np: json['np'] as String?,
+      ne: json['ne'] as String?,
     );
 
 Map<String, dynamic> _$$NameLocalisedFieldsImplToJson(
         _$NameLocalisedFieldsImpl instance) =>
     <String, dynamic>{
       'en': instance.en,
-      'np': instance.np,
+      'ne': instance.ne,
     };

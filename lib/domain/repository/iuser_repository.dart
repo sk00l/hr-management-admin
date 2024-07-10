@@ -12,4 +12,6 @@ abstract interface class IUserRepository {
   Future<void> saveUser(UserModel userModel);
 
   Future<String> uploadImage(File imageFile);
+
+  Future<void> deleteUserbyEmail(String email);
 }

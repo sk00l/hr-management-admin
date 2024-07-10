@@ -18,3 +18,10 @@ class GetUserByIdEvent extends UserDetailsEvent {
 }
 
 class PickImage extends UserDetailsEvent {}
+
+class DeleteUser extends UserDetailsEvent {
+  final String email;
+  DeleteUser(
+    this.email,
+  );
+}

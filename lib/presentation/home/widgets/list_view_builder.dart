@@ -1,5 +1,7 @@
 import 'package:admin_pannel/core/constants/app_color.dart';
 import 'package:admin_pannel/presentation/home/bloc/user_details_bloc.dart';
+import 'package:admin_pannel/presentation/home/widgets/edit_dialog_container.dart';
+import 'package:fluid_dialog/fluid_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -145,14 +147,30 @@ class _ListViewVerticalState extends State<ListViewVertical> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => FluidDialog(
+                                            rootPage: FluidDialogPage(
+                                                alignment: Alignment.center,
+                                                builder: (context) =>
+                                                    const EditDialogContainer()),
+                                          ),
+                                        );
+                                      },
                                       icon: const Icon(
                                         Icons.edit,
                                         color: Colors.white,
                                       ),
                                     ),
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        context.read<UserDetailsBloc>().add(
+                                            DeleteUser(state
+                                                    .userModelList![index]
+                                                    .email ??
+                                                ""));
+                                      },
                                       icon: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
@@ -179,14 +197,14 @@ class _ListViewVerticalState extends State<ListViewVertical> {
                                     : Container(
                                         padding: const EdgeInsets.all(12),
                                         decoration: BoxDecoration(
-                                          color: Colors.green.shade100,
+                                          color: Colors.red.shade100,
                                           borderRadius:
                                               BorderRadius.circular(8),
                                         ),
                                         child: const Text(
-                                          'User',
+                                          'Not Admin',
                                           style: TextStyle(
-                                            color: Colors.green,
+                                            color: Colors.red,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
